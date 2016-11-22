@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  {% if session.logged_in %}
+
+  <h1 align="center">- Fiche élève -</h1><br/>
+  
+  {% for entry in entries %}
+  <div style="position:relative;display: inline-block;width:100%;border-style: solid;border-width: 3px;border-color: #377ba8;border-radius: 20px;">
+  <h2 style="color:#377ba8;text-align: center;text-decoration: underline;">{{ entry.nom }} {{ entry.prenom|safe }} </h2>
+  <h3 style="color:#377ba8;"> Informations générales</h3>
+  <p>
+     Date de naissance : {{ entry.date_naissance|safe}}<br/>
+     Téléphone : {{ '0'+entry.telephone|safe }}<br/>
+     Mail : {{ entry.prenom.lower()|safe }}.{{ entry.nom.lower()|safe }}@eleve-imta.fr<br/>
+     Campus : {{ entry.ecole_origine|safe }}<br/>
+     Option : {{ entry.option|safe }}
+  </p>
+  <h3 style="color:#377ba8;"> Résultats obtenus</h2>
+  <p>
+     Mathématiques : {{ entry.mathematiques|safe}}<br/>
+     Informatique : {{ entry.informatique|safe }}
+  </p>
+  </div>
+    
+  {% else %}
+    <li><em>Il n'y a aucun élève inscrit actuellement.</em>
+    
+  {% endfor %}
+
+
+  {% else%}
+    <h2>Veuillez vous identifier pour accéder au panel de gestion.</h2>
+  {% endif %}
+{% endblock %}

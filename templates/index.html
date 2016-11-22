@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block body %}
+	{% if session.logged_in %}
+		<h2 align="center">Bienvenue sur le site de gestion des élèves de l'IMTA</h2><br/>
+		<h3>Que souhaitez-vous faire ?</h3>
+		
+		<!-- CONSULTER BASE DE DONNEES ELEVES -->
+		<form action="{{ url_for('show_entries') }}">
+    		<input type="submit" value="Consulter la liste des élèves" />
+    	</form> <br/>
+		<!-- AJOUTER UN ELEVE -->
+		<form action="{{ url_for('ajouter_eleve') }}">
+    		<input type="submit" value="Inscrire un élève" />
+    	</form> <br/>
+		<!-- SUPPRIMER UN ELEVE -->
+		<form action="{{ url_for('supprimer_eleve') }}">
+    		<input type="submit" value="Supprimer un élève" />
+    	</form> <br/>
+    	<form action="{{ url_for('mail') }}">
+    		<input type="submit" value="Obtenir le mail d'un élève" />
+    	</form> <br/>
+		<!-- CONSULTER NOTE D'UN ELEVE -->
+		<form action="{{ url_for('notes') }}">
+    		<input type="submit" value="Voir/Modifier les notes d'un élève" />
+    	</form> <br/>
+		<!-- CONSULTER LA FICHE D'UN ELEVE -->
+    	<form action="{{ url_for('consulter_eleve') }}">
+    		<input type="submit" value="Consulter la fiche d'un élève" />
+    	</form>
+
+	{% else %}
+		<h2 align="center">Veuillez vous identifier pour accéder au panel de gestion.</h2>
+		<br>
+	{% endif %}
+{% endblock %}

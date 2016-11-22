@@ -1,0 +1,21 @@
+	{% extends "layout.html" %}
+	{% block body %}
+	{% if session.logged_in %}
+	<h2>{{entriesnotes[1]}} {{entriesnotes[0]}}</h2><br/>
+	<dl>
+	    <form action="{{ url_for('modificationnoteseleves',nom=entriesnotes[1],prenom=entriesnotes[0]) }}" method=post>
+	      
+	        <dt><strong>Mathématiques :</strong>
+	        <br/><input type=text size=30 name=math><br/><br/>
+	        <dt><strong>Informatique :
+	        <br/><input type=text size=30 name=info><br/><br/>
+	        
+
+	        <dd><strong><input type="submit" value="Modifier les notes"></strong>
+	     
+	    </form>
+ </dl>
+	  {% else %}
+	    <h2>Veuillez vous identifier pour accéder au panel de gestion.</h2>  
+	  {% endif %}
+	  {% endblock %}

@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  {% if session.logged_in %}
+
+  <h2>Consulter la fiche d'un élève :</h2><br/><p>Option non sensible au format des caractères (majuscule/minuscule)</p>
+
+  
+    <form action="{{ url_for('consulter') }}" method="post">
+    <dl>
+      <dt>Nom de l'élève : 
+      <dd><input type="text" name="nom_eleve"><br><br/>
+      <dt>Prénom de l'élève : 
+      <dd><input type="text" name="prenom_eleve"><br><br/>
+      <dt><input type=submit value="Consulter">
+    </dl>
+    </form> 
+  
+
+  {% else%}
+    <h2>Veuillez vous identifier pour accéder au panel de gestion.</h2>
+  {% endif %}
+{% endblock %}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>IMTA</title>
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+  <link href="http://127.0.0.1:5000/static/css/bootstrap.min.css" rel="stylesheet">
+    
+</head>
+
+<div class=page>
+  <a href="{{ url_for('index') }}"><img style="float: right;" src="../static/logo.png" alt="logo"/></a>
+  <a href ="{{ url_for('index') }}"><h1>Institut Mines Télécom Atlantique<br/> <br/></h1></a>
+
+
+  <div class=metanav>
+  {% if not session.logged_in %}
+    <a class="log_class" href="{{ url_for('login') }}">Se connecter</a>
+  {% else %}
+    <a class="btn btn-info" href="{{ url_for('show_entries') }}">Liste des élèves</a>
+    <a class="btn btn-info" href="{{ url_for('consulter_eleve') }}">Consulter la fiche d'un élève</a>
+    <a class="btn btn-info" href="{{ url_for('ajouter_eleve') }}">Ajouter un élève</a>
+    <a class="btn btn-info" href="{{ url_for('supprimer_eleve') }}">Supprimer un eleve</a>
+    <a class="btn btn-info" href="{{ url_for('mail') }}">Trouver un mail</a>
+    <a class="btn btn-info" href="{{ url_for('notes') }}">Consulter/modifier les notes</a>
+    <a class="log_class" href="{{ url_for('logout') }}">Déconnection</a>
+  {% endif %}
+  </div>
+
+  {% for message in get_flashed_messages() %}
+    <div class=flash>{{ message }}</div>
+    <br>
+  {% endfor %}
+  {% block body %}{% endblock %}
+</div>

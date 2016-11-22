@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{% if session.logged_in %}
+<h2>Notes des élèves : </h2><br/>
+
+<table style="width: 100%">
+<tr>
+<th>Nom</th>
+<th>Prénom</th>
+<th>Mathématiques</th>
+<th>Informatique</th>
+<th>Modifier les notes</th>
+</tr>
+ {% for entry2 in entriesnotes %}
+<tr>
+	<td> {{ entry2.nom|safe }}</td>
+    <td>{{ entry2.prenom|safe }}</td>
+   	<td> {{ entry2.mathematiques|safe }}</td>
+    <td>{{ entry2.informatique|safe }}</td>
+    <td><a href ="{{ url_for('modification',nom=entry2.nom,prenom=entry2.prenom) }}">Modifier les notes</td>
+</tr>
+    {% else %}
+    <li><em>Il n'y a pas d'élèves qui correspondent à votre requète.</em>
+    
+  {% endfor %}
+  </table>
+    {% else%}
+    <h2>Veuillez vous identifier pour accéder au panel de gestion.</h2>
+{% endif %}
+{% endblock %}
+

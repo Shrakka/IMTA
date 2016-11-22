@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{% block body %}
+
+  {% if session.logged_in %}
+
+  <h2>Élèves inscrits à l'IMTA </h2>
+  <br>
+  <p style="display: inline;">Trier par campus :
+  <form style="display: inline;" action="{{ url_for('show_entries_triees') }}" method=post>
+    <SELECT name=campus size=1>
+      <option selected value="None"> --- </option>
+      <OPTION value="Nantes">Nantes</OPTION>
+      <OPTION value="Brest">Brest</OPTION>
+      <OPTION value="Rennes">Rennes</OPTION>
+    </SELECT>
+    <input type=submit value="Trier">
+  </form>
+  </p>
+  <ul class=entries>
+<table style="width: 100%">
+  <tr>
+    <th>Nom</th>
+    <th>Prénom</th>
+    <th>Date de naissance</th>
+    <th>Téléphone</th>
+    <th>Option</th>
+    <th>Campus</th>
+    <th>Supprimer</th>
+  </tr>
+
+  {% for entry in entries %}
+  <tr>
+    <td><em>{{ entry.nom }}</em></td>
+    <td>{{ entry.prenom|safe }}</td>
+    <td>{{ entry.date_naissance|safe }}</td>
+    <td>{{ '0'+entry.telephone|safe }}</td>
+    <td>{{ entry.option|safe }}</td>
+    <td>{{ entry.ecole_origine|safe }}</td>
+    <td><form action="{{ url_for('delete_eleve',nom=entry.nom,prenom=entry.prenom) }}" method="post"><input type="submit" value="X"></form></td>
+  </tr>
+
+    
+  {% else %}
+    <li><em>Il n'y a aucun élève inscrit actuellement.</em>
+    
+  {% endfor %}
+  </table>
+  </ul>
+  {% else%}
+    <h2>Veuillez vous identifier pour accéder au panel de gestion.</h2>
+  {% endif %}
+{% endblock %}
